@@ -24,6 +24,12 @@
 			<groupId>de.akquinet.android.androlog</groupId>
 			<artifactId>androlog</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -38,7 +44,7 @@
 					<run>true</run>
 					<sdk>
 						<platform>7</platform>
-						<path>/home/ritchie/Android/android-sdk-linux_x86  </path>
+
 					</sdk>
 
 					<deleteConflictingFiles>true</deleteConflictingFiles>
