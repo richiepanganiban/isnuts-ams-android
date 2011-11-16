@@ -5,6 +5,10 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class ServiceApplication {
+	
+	@SerializedName("serviceApplicationId")
+	private long serviceApplicationId;
+	
 	@SerializedName("activePromo")
 	private boolean activePromo;
 
@@ -28,6 +32,14 @@ public class ServiceApplication {
 
 	@SerializedName("categories")
 	private List<Category> categories;
+	
+	public long getServiceApplicationId() {
+		return serviceApplicationId;
+	}
+
+	public void setServiceApplicationId(long serviceApplicationId) {
+		this.serviceApplicationId = serviceApplicationId;
+	}
 
 	public boolean isActivePromo() {
 		return activePromo;
@@ -92,6 +104,7 @@ public class ServiceApplication {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+	
 
 	@Override
 	public String toString() {
