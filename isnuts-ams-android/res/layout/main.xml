@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:id="@+id/serviceAppId" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/title" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/description" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/serviceType" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/serviceNumber"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="@string/hello" />
+	<TextView android:id="@+id/activePromo" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/appendToMobile"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="@string/hello" />
+	<TextView android:id="@+id/category" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+	<TextView android:id="@+id/keyword" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/hello" />
+
+
 </LinearLayout>
