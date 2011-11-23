@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.experimental.categories.Categories;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -35,7 +33,15 @@ public class SqliteServiceApplicationDao extends SQLiteOpenHelper {
 		database.execSQL("CREATE TABLE services(serviceApplicationId INTEGER PRIMARY KEY," +
 				"title TEXT, description TEXT, serviceType TEXT, " +
 				"serviceNumber TEXT, activePromo INTEGER, appendMobileToServiceNumber " +
-				"INTEGER, categories BLOB, keywordItems BLOB)");
+				"INTEGER, categories INTEGER)");
+		database.execSQL("CREATE TABLE keywords (serviceApplicationId INTEGER, itemType TEXT," +
+				" literalValue TEXT, FOREIGN KEY(serviceApplicationId) REFERENCES " +
+				"services(serviceApplicationId) ON DELETE CASCADE)");
+		database.execSQL("CREATE TABLE categories (categoryId categoryId INTEGER PRIMARY KEY, " +
+				"name TEXT)");
+		database.execSQL("CREATE TABLE serviceCategoriesLookup (serviceApplicationId INTEGER, " +
+				"categoryId INTEGER, FOREIGN KEY(serviceApplicationId) REFERENCES " +
+				"service(serviceApplicationId) ON DELETE CASCADE, FOREIGN KEY(categoryId) REFERENCES categories(categoryId) ON DELETE CASCADE)");
 	}
 
 	@Override
@@ -53,13 +59,29 @@ public class SqliteServiceApplicationDao extends SQLiteOpenHelper {
 		contentValues.put("serviceNumber", serviceApplication.getServiceNumber());
 		contentValues.put("activePromo", parseBooleanToInt(serviceApplication.isActivePromo()));
 		contentValues.put("appendMobileToServiceNumber", parseBooleanToInt(serviceApplication.isAppendMobileToServiceNumber()));
-		contentValues.put("categories", serializeToByteArrayObject(serviceApplication.getCategories()));
-		contentValues.put("keywordItems", serializeToByteArrayObject(serviceApplication.getKeywordItems()));
+		insertKeywords(serviceApplication);
 		
-		getWritableDatabase().insert("services", "name", contentValues);
+//		contentValues.put("categories", serializeToByteArrayObject(serviceApplication.getCategories()));
+//		contentValues.put("keywordItems", serializeToByteArrayObject(serviceApplication.getKeywordItems()));
+		
+		getWritableDatabase().insert("services", null, contentValues);
+		
 		
 	}
 	
+	private void insertKeywords(ServiceApplication serviceApplication) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("serviceApplicationId", serviceApplication.getServiceApplicationId());
+		List<InputParams> inputParams = serviceApplication.getKeywordItems();
+		
+		for(InputParams inputParam : inputParams ) {
+			contentValues.put("itemType", inputParam.getItemType());
+			contentValues.put("literalValue", inputParam.getLiteralValue());
+			getWritableDatabase().insert("keywords", null , contentValues);
+		}
+		
+	}
+
 	public List<ServiceApplication> getAllApplicationServices(){
 		Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM services ORDER BY serviceApplicationId", null);
 		cursor.moveToFirst();
