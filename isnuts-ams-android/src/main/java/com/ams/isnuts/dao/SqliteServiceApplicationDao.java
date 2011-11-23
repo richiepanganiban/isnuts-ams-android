@@ -33,15 +33,18 @@ public class SqliteServiceApplicationDao extends SQLiteOpenHelper {
 		database.execSQL("CREATE TABLE services(serviceApplicationId INTEGER PRIMARY KEY," +
 				"title TEXT, description TEXT, serviceType TEXT, " +
 				"serviceNumber TEXT, activePromo INTEGER, appendMobileToServiceNumber " +
-				"INTEGER, categories INTEGER)");
-		database.execSQL("CREATE TABLE keywords (serviceApplicationId INTEGER, itemType TEXT," +
-				" literalValue TEXT, FOREIGN KEY(serviceApplicationId) REFERENCES " +
+				"INTEGER)");
+		database.execSQL("CREATE TABLE keywords (serviceApplicationReferenceId INTEGER, itemType TEXT," +
+				" literalValue TEXT, FOREIGN KEY(serviceApplicationReferenceId) REFERENCES " +
 				"services(serviceApplicationId) ON DELETE CASCADE)");
 		database.execSQL("CREATE TABLE categories (categoryId categoryId INTEGER PRIMARY KEY, " +
 				"name TEXT)");
-		database.execSQL("CREATE TABLE serviceCategoriesLookup (serviceApplicationId INTEGER, " +
-				"categoryId INTEGER, FOREIGN KEY(serviceApplicationId) REFERENCES " +
-				"service(serviceApplicationId) ON DELETE CASCADE, FOREIGN KEY(categoryId) REFERENCES categories(categoryId) ON DELETE CASCADE)");
+		database.execSQL("CREATE TABLE serviceCategoriesLookup (serviceApplicationReferenceId INTEGER, " +
+				"categoryReferenceId INTEGER, FOREIGN KEY(serviceApplicationReferenceId) REFERENCES " +
+				"services(serviceApplicationId) ON DELETE CASCADE, FOREIGN KEY(categoryReferenceId) REFERENCES categories(categoryId) ON DELETE CASCADE)");
+//		database.execSQL("CREATE TRIGGER serviceCategoryTrigger BEFORE INSERT OF serviceApplicationId ON services" +
+//				"BEGIN " +
+//					"INSERT INTO serviceCategoriesLookup values (   "
 	}
 
 	@Override
