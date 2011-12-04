@@ -8,6 +8,8 @@ public class InputParams {
 
 	@SerializedName("literalValue")
 	private String literalValue;
+	
+	private String promptMessage;
 
 	public String getItemType() {
 		return itemType;
@@ -25,15 +27,12 @@ public class InputParams {
 		this.literalValue = literalValue;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("InputParams [itemType=");
-		builder.append(itemType);
-		builder.append(", literalValue=");
-		builder.append(literalValue);
-		builder.append("]");
-		return builder.toString();
+	public String getPromptMessage() {
+		return promptMessage;
+	}
+
+	public void setPromptMessage(String promptMessage) {
+		this.promptMessage = promptMessage;
 	}
 
 }
