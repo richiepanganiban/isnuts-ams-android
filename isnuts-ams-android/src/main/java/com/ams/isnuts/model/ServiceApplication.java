@@ -33,10 +33,12 @@ public class ServiceApplication {
 	@SerializedName("categories")
 	private List<Category> categories;
 	
+	private String targetMobileNumber;
+	
 	public long getServiceApplicationId() {
 		return serviceApplicationId;
 	}
-
+	
 	public void setServiceApplicationId(long serviceApplicationId) {
 		this.serviceApplicationId = serviceApplicationId;
 	}
@@ -105,28 +107,17 @@ public class ServiceApplication {
 		this.categories = categories;
 	}
 	
+	public String getTargetMobileNumber() {
+		return targetMobileNumber;
+	}
+
+	public void setTargetMobileNumber(String targetMobileNumber) {
+		this.targetMobileNumber = targetMobileNumber;
+	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ServiceApplication [activePromo=");
-		builder.append(activePromo);
-		builder.append(", serviceType=");
-		builder.append(serviceType);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", serviceNumber=");
-		builder.append(serviceNumber);
-		builder.append(", appendMobileToServiceNumber=");
-		builder.append(appendMobileToServiceNumber);
-		builder.append(", keywordItems=");
-		builder.append(keywordItems);
-		builder.append(", categories=");
-		builder.append(categories);
-		builder.append("]");
-		return builder.toString();
+		return title;
 	}
-
+	
 }
