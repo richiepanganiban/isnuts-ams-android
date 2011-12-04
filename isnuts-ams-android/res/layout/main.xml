@@ -1,27 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<TextView android:id="@+id/serviceAppId" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/title" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/description" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/serviceType" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/serviceNumber"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="@string/hello" />
-	<TextView android:id="@+id/activePromo" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/appendToMobile"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="@string/hello" />
-	<TextView android:id="@+id/category" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
-	<TextView android:id="@+id/keyword" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/relativeLayoutMain"
+    >
+    <ViewFlipper android:id="@+id/flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">  
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
+            <TextView android:id="@+id/favoritesHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="18px"
+            android:text="Favorites" >
+            </TextView>
 
-</LinearLayout>
+  			<ListView android:id="@+id/favoriteServicesList"
+    			android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:layout_alignParentTop="true"
+  			/>
+  	    </LinearLayout> 
+  	    
+  	    <LinearLayout
+              android:orientation="vertical"
+          	  android:layout_width="fill_parent"
+        	  android:layout_height="fill_parent">
+
+        	<TextView android:id="@+id/callAndTextServicesHeader"
+        	    android:layout_width="fill_parent"
+            	android:layout_height="wrap_content"
+            	android:textColor="#ffffff"
+            	android:textStyle="bold"
+            	android:textSize="18px"
+            	android:text="Call and Text Services" >
+            </TextView>
+  			<ListView android:id="@+id/callAndTextServicesList"
+    			android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:layout_alignParentTop="true"
+  			/>
+  	    </LinearLayout> 
+  			
+    </ViewFlipper>
+</RelativeLayout>
