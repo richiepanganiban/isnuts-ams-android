@@ -8,6 +8,8 @@ public class InputParams {
 
 	@SerializedName("literalValue")
 	private String literalValue;
+	
+	private String promptMessage;
 
 	@SerializedName("label")
 	private String label;
@@ -34,6 +36,14 @@ public class InputParams {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	public String getPromptMessage() {
+		return promptMessage;
+	}
+
+	public void setPromptMessage(String promptMessage) {
+		this.promptMessage = promptMessage;
 	}
 
 	@Override
@@ -93,6 +103,7 @@ public class InputParams {
 		builder.append(label);
 		builder.append("]");
 		return builder.toString();
-	}
 
+	}
+	
 }
