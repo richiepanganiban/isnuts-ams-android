@@ -2,6 +2,7 @@ package com.ams.isnuts.model;
 
 public class CustomServiceApplication {
 	private int customServiceId;
+	private String customServiceName;
 	private ServiceApplication serviceApplication;
 
 	public int getCustomServiceId() {
@@ -26,6 +27,14 @@ public class CustomServiceApplication {
 
 	public String getTitle() {
 		return serviceApplication.getTitle();
+	}
+	
+	public String getCustomServiceName() {
+		return customServiceName;
+	}
+
+	public void setCustomServiceName(String customServiceName) {
+		this.customServiceName = customServiceName;
 	}
 
 	@Override
