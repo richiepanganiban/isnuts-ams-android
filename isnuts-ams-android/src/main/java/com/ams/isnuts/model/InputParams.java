@@ -2,17 +2,19 @@ package com.ams.isnuts.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class InputParams {
+public class InputParams implements Comparable<InputParams> {
 	@SerializedName("itemType")
 	private String itemType;
 
 	@SerializedName("literalValue")
 	private String literalValue;
-	
+
 	private String promptMessage;
 
 	@SerializedName("label")
 	private String label;
+	
+	private int order;
 
 	public String getItemType() {
 		return itemType;
@@ -46,13 +48,29 @@ public class InputParams {
 		this.promptMessage = promptMessage;
 	}
 
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public int compareTo(InputParams inputParam) {
+		return inputParam.getOrder() - this.getOrder();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((itemType == null) ? 0 : itemType.hashCode());
-		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		result = prime * result + ((literalValue == null) ? 0 : literalValue.hashCode());
+		result = prime * result
+				+ ((itemType == null) ? 0 : itemType.hashCode());
+		result = prime * result
+				+ ((literalValue == null) ? 0 : literalValue.hashCode());
+		result = prime * result + order;
+		result = prime * result
+				+ ((promptMessage == null) ? 0 : promptMessage.hashCode());
 		return result;
 	}
 
