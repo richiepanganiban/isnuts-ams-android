@@ -20,7 +20,9 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.ams.isnuts.mock.MockDataFactory;
+import com.ams.isnuts.model.ActionItem;
 import com.ams.isnuts.model.CustomServiceApplication;
+import com.ams.isnuts.model.QuickAction;
 import com.ams.isnuts.model.ServiceApplication;
 import com.ams.isnuts.service.ServiceApplicationService;
 import com.ams.isnuts.service.impl.ServiceApplicationServiceImpl;
@@ -41,6 +43,10 @@ public class AmsMainActivity extends Activity implements OnTouchListener {
 
 	
 	private float downXValue;
+	
+	private QuickAction serviceAppQuickAction;
+	
+	private QuickAction favoriteAppQuickAction;
 
 //	private ServiceApplicationDao serviceDao = new SqliteServiceApplicationDao(
 //			this);
@@ -68,6 +74,39 @@ public class AmsMainActivity extends Activity implements OnTouchListener {
 		callAndTextServicesListView.setOnItemLongClickListener(serviceApplicationOnItemLongClickListener);
 		callAndTextServicesAdapter = new ArrayAdapter<ServiceApplication>(this,android.R.layout.simple_list_item_1, serviceApplications);
 		callAndTextServicesListView.setAdapter(callAndTextServicesAdapter);
+		
+		ActionItem invokeService = new ActionItem();
+		invokeService.setTitle("Use Service");
+		invokeService.setIcon(getResources().getDrawable(R.drawable.ic_accept));
+
+		ActionItem addToFavorites = new ActionItem();
+		addToFavorites.setTitle("Add to Favorites");
+		addToFavorites.setIcon(getResources().getDrawable(R.drawable.ic_add));
+		serviceAppQuickAction = new QuickAction(this);
+		
+		serviceAppQuickAction.addActionItem(invokeService);
+		serviceAppQuickAction.addActionItem(addToFavorites);
+		serviceAppQuickAction.setOnActionItemClickListener(serviceAppQuickActionListener);
+		
+		ActionItem invokeFavoriteService = new ActionItem();
+		invokeFavoriteService.setTitle("Use Service");
+		invokeFavoriteService.setIcon(getResources().getDrawable(R.drawable.ic_accept));
+		
+		ActionItem editFavoriteService = new ActionItem();
+		editFavoriteService.setTitle("Edit");
+		editFavoriteService.setIcon(getResources().getDrawable(R.drawable.ic_up));
+
+		
+		ActionItem removeFromFavorites = new ActionItem();
+		removeFromFavorites.setTitle("Remove");
+		removeFromFavorites.setIcon(getResources().getDrawable(R.drawable.ic_add));
+		
+		favoriteAppQuickAction = new QuickAction(this);
+		
+		favoriteAppQuickAction.addActionItem(invokeFavoriteService);
+		favoriteAppQuickAction.addActionItem(editFavoriteService);
+		favoriteAppQuickAction.addActionItem(removeFromFavorites);
+		
 	}
 
 	public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -102,10 +141,14 @@ public class AmsMainActivity extends Activity implements OnTouchListener {
 
 		public boolean onItemLongClick(AdapterView<?> context, View view,
 				int position, long id) {
-			Toast.makeText(AmsMainActivity.this,
-					"Item in position " + position + " clicked",
-					Toast.LENGTH_LONG).show();
+//			Toast.makeText(AmsMainActivity.this,
+//					"Item in position " + position + " clicked",
+//					Toast.LENGTH_LONG).show();
+			serviceAppQuickAction.show(view);
+			serviceAppQuickAction.setAnimStyle(QuickAction.ANIM_GROW_FROM_CENTER);
 			return true;
+			
+			
 		}
 	}; 
 	
@@ -113,12 +156,37 @@ public class AmsMainActivity extends Activity implements OnTouchListener {
 
 		public boolean onItemLongClick(AdapterView<?> context, View view,
 				int position, long id) {
-			Toast.makeText(AmsMainActivity.this,
-					"Item in position " + position + " clicked",
-					Toast.LENGTH_LONG).show();
+//			Toast.makeText(AmsMainActivity.this,
+//					"Item in position " + position + " clicked",
+//					Toast.LENGTH_LONG).show();
+			favoriteAppQuickAction.show(view);
+			favoriteAppQuickAction.setAnimStyle(QuickAction.ANIM_GROW_FROM_CENTER);
 			return true;
 		}
 	}; 
+	
+	private QuickAction.OnActionItemClickListener favoriteAppQuickActionListener = new QuickAction.OnActionItemClickListener() {
+		
+		public void onItemClick(int pos) {
+			if (pos == 0) { //Add item selected
+				Toast.makeText(AmsMainActivity.this, "Invoke Service selected", Toast.LENGTH_SHORT).show();
+			} else if (pos == 1) { //Accept item selected
+				Toast.makeText(AmsMainActivity.this, "Add to favorites selected", Toast.LENGTH_SHORT).show();
+			}
+		}
+	};
+	
+	private QuickAction.OnActionItemClickListener serviceAppQuickActionListener = new QuickAction.OnActionItemClickListener() {			
+		
+		public void onItemClick(int pos) {
+			
+			if (pos == 0) { //Add item selected
+				Toast.makeText(AmsMainActivity.this, "Invoke Service selected", Toast.LENGTH_SHORT).show();
+			} else if (pos == 1) { //Accept item selected
+				Toast.makeText(AmsMainActivity.this, "Add to favorites selected", Toast.LENGTH_SHORT).show();
+			}
+		}
+	};
 	
 	private OnItemClickListener useServiceOnItemClickListener = new OnItemClickListener() {
 
